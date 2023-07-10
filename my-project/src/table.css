@@ -1,0 +1,19 @@
+.table-cell {
+    background-color: lightgray;
+    color: black;
+  }
+  
+  .table-cell.red {
+    background-color: red;
+    color: white;
+  }
+  
+  .table-cell.blue {
+    background-color: blue;
+    color: white;
+  }
+  
+  .table-cell.green {
+    background-color: green;
+    color: white;
+  }
