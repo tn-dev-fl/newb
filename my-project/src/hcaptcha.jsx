@@ -45,7 +45,6 @@ export function HTTP() {
         <div>
         <HCaptcha
                 ref={captchaRef}
-                theme="dark"
 
           sitekey="29124554-1025-4a02-8fd2-d3c112b50c6a"
           onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)}
@@ -98,7 +97,7 @@ export function Socks4() {
         <div>
         <HCaptcha
                 ref={captchaRef}
-
+              
           sitekey="29124554-1025-4a02-8fd2-d3c112b50c6a"
           onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)}
         />

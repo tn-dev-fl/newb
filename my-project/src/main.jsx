@@ -5,10 +5,10 @@ import BasicTable from './table.jsx'
 import './index.css'
 import React from 'react'
 import { render } from 'react-dom';
-
+import { HTTP } from './hcaptcha.jsx'
 import HCaptcha from 'react-hcaptcha';
 
-import {BasicCard,BasicCardsocks5,BasicCardsocks4} from './card.jsx'
+import {BasicCard} from './card.jsx'
 
 function MyComponent() {
   useEffect(() => {
@@ -17,9 +17,8 @@ function MyComponent() {
 }
 
 render(
-  <>
-  <div className="container">
-  <MyComponent/>
+<div>
+  <MyComponent />
   <Nav />
   <div className="content">
     <div className="table-wrapper">
@@ -27,11 +26,15 @@ render(
     </div>
     <div className="card-wrapper">
       <BasicCard />
+      {/* Include the additional BasicCard component */}
     </div>
-    {/* Remove this extra CAPTCHA element */}
   </div>
 </div>
-</>,
+
+
+
+
+,
   document.getElementById('root')
 
 );

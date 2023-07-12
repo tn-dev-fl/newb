@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,46 +6,53 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+import CountryFlag from 'react-country-flag';
 
 export default function BasicTable() {
+  const [proxies, setProxies] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/json')
+      .then(response => response.json())
+      .then(data => {
+        setProxies(data.proxies);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <div className='conta'>
-    <TableContainer component={Paper}>
-      <Table className="table">
-        <TableHead>
-          <TableRow>
-            <TableCell className="table-header-cell">Dessert (100g serving)</TableCell>
-            <TableCell align="right" className="table-header-cell">Calories</TableCell>
-            <TableCell align="right" className="table-header-cell">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right" className="table-header-cell">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right" className="table-header-cell">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row" className="table-cell">{row.name}</TableCell>
-              <TableCell align="right" className="table-cell">{row.calories}</TableCell>
-              <TableCell align="right" className="table-cell">{row.fat}</TableCell>
-              <TableCell align="right" className="table-cell">{row.carbs}</TableCell>
-              <TableCell align="right" className="table-cell">{row.protein}</TableCell>
+      <TableContainer component={Paper}>
+        <Table className="table">
+          <TableHead>
+            <TableRow>
+              <TableCell className="table-header-cell">ip:port</TableCell>
+              <TableCell align="right" className="table-header-cell">Ip</TableCell>
+              <TableCell align="right" className="table-header-cell">Country</TableCell>
+              <TableCell align="right" className="table-header-cell">Response</TableCell>
+              <TableCell align="right" className="table-header-cell">Latency</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+          </TableHead>
+          <TableBody>
+            {proxies.map((proxy, index) => (
+              <TableRow key={index}>
+                <TableCell component="th" scope="row" className="table-cell">{proxy["ip:port"]}</TableCell>
+                <TableCell align="right" className="table-cell">{proxy.ip}</TableCell>
+                <TableCell align="right" className="table-cell">
+                  <CountryFlag countryCode={proxy.country} svg style={{
+                    fontSize: '2em',
+                    lineHeight: '2em',
+                }}/>
+                </TableCell>
+                <TableCell align="right" className="table-cell">{proxy.response}</TableCell>
+                <TableCell align="right" className="table-cell">{proxy.latency}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

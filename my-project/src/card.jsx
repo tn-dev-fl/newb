@@ -16,17 +16,53 @@ const bull = (
     •
   </Box>
 );
+export default function Lines() {
+
+    const [lineCount, setLineCount] = useState(0);
+  
+    useEffect(() => {
+      // Make API call to get the number of lines
+      fetch('http://localhost:3000/proxies_lines')
+        .then(response => response.json())
+        .then(data => {
+          // Update the component state with the number of lines
+          setLineCount(data.http);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }, []);
+  
+    return (
+      <div>
+        <p>Number of lines: {lineCount}</p>
+      </div>
+    );
+  }
 
 
 export function BasicCard() {
+  const [dates, setdates] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/date')
+      .then(response => response.json())
+      .then(data => {
+        setdates(data.date);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
   return (
-    <Card sx={{ width: 300, height: 400 }} className="">
+    <Card sx={{ width: 400, height: 400 }}>
   <CardContent >
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Proxies free HTTP
+          Proxies free HTTP 
         </Typography>
+        <Lines/>
         <Typography variant="h5" component="div">
-          Date checked 
+        <p>Laste date checked: {dates}</p>
         </Typography>
         <Typography variant="body2">
           <br />
@@ -34,51 +70,9 @@ export function BasicCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <HTTP/>
+      <HTTP/>
       </CardActions>
     </Card>
   );
    
-}
-export function BasicCardsocks4() {
-  return (
-    <Card sx={{ width: 300, height: 400 }} className="">
-  <CardContent >
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Proxies free HTTP
-        </Typography>
-        <Typography variant="h5" component="div">
-          Date checked 
-        </Typography>
-        <Typography variant="body2">
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Socks4/>
-      </CardActions>
-    </Card>
-  );
-}
-export function BasicCardsocks5() {
-  return (
-    <Card sx={{ width: 300, height: 400 }} className="">
-  <CardContent >
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Proxies free HTTP
-        </Typography>
-        <Typography variant="h5" component="div">
-          Date checked 
-        </Typography>
-        <Typography variant="body2">
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Socks5/>
-      </CardActions>
-    </Card>
-  );
 }

@@ -1,26 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
-.const1  {
+.container {
+  font-family: 'Poppins', sans-serif;
+}
+
+.const1 {
   position: fixed;
-  
   background-color: #242424;
   display: flex;
-  color:white;
+  color: white;
   text-decoration: none;
   text-align: left;
   width: 100%;
   z-index: 100;
   top: 0;
   left: 0;
-
-
 }
+
 .my-component {
   margin-right: 10px;
 }
 
-
 .const1 ul {
-  
   display: flex;
   list-style-type: none;
   margin: 0;
@@ -28,22 +27,23 @@
 }
 
 .const1 ul li {
-  
   margin: 0 10px;
 }
-a{
-  
-  color:#fff;
-  text-shadow: 1px 1px 2px rgba(0,0,0,.18);
+
+a {
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.18);
   line-height: 45px;
   font-size: 13px;
-font-family: 'Roboto',sans-serif;
-text-decoration: none;
-text-align: left;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  text-align: left;
 }
-body{background-color: #191818;
 
+body {
+  background-color: #191818;
 }
+
 li {
   display: flex;
   justify-content: center;
@@ -55,9 +55,9 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  
+  height: 70vh;
 }
+
 .table-cell {
   background-color: rgb(65, 183, 61);
   color: black;
@@ -69,10 +69,10 @@ li {
 }
 
 .table-header-cell {
-background-color:rgb(65, 183, 61);
-font-family: 'Poppins', sans-serif;
-
+  background-color: rgb(65, 183, 61);
+  font-family: 'Poppins', sans-serif;
 }
+
 .content-wrapper {
   display: flex;
   flex-direction: column;
@@ -82,15 +82,24 @@ font-family: 'Poppins', sans-serif;
   display: flex;
   padding: 50px;
   justify-content: space-between;
-  
-}
-.card{
-  margin-top: auto;
-width: 50;}
-root{
-  font-family: 'Poppins', sans-serif;
-}
-.table-wrapper{
-  height: 80vh;
 }
 
+.card {
+  margin-top: auto;
+  width: 50;
+}
+
+.table-header-cell,.table-cell {
+  background-color: rgb(89, 216, 84);
+  font-family: 'Poppins', sans-serif;
+  border: 2px solid rgb(128, 94, 94); /* Add red color border to table header cells */
+}
+root {
+  font-family: 'Poppins', sans-serif;
+}
+
+.table-wrapper {
+  height: 60vh; /* Adjust the height to your desired value */
+  margin-top: 20px; /* Add margin-top to push the table higher */
+  overflow-y: auto; /* Add vertical scroll if needed */
+}
