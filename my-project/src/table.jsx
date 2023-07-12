@@ -12,7 +12,7 @@ export default function BasicTable() {
   const [proxies, setProxies] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/json')
+    fetch('https://proxiesfree.cc/api/json')
       .then(response => response.json())
       .then(data => {
         setProxies(data.proxies);

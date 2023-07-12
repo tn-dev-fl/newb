@@ -22,7 +22,7 @@ export default function Lines() {
   
     useEffect(() => {
       // Make API call to get the number of lines
-      fetch('http://localhost:3000/proxies_lines')
+      fetch('https://proxiesfree.cc/api/proxies_lines')
         .then(response => response.json())
         .then(data => {
           // Update the component state with the number of lines
@@ -45,7 +45,7 @@ export function BasicCard() {
   const [dates, setdates] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/date')
+    fetch('https://proxiesfree.cc/api/date')
       .then(response => response.json())
       .then(data => {
         setdates(data.date);
