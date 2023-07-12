@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 3000
 
 # Start the backend server
+
 CMD [ "node", "app.js" ]
