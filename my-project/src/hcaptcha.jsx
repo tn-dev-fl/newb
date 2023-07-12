@@ -10,7 +10,7 @@ export function HTTP() {
         function handleClick() {
             // Perform action with the token value
             console.log(token);
-            axios.post('http://localhost:3000/http', { test: token }, { responseType: 'blob' })
+            axios.post('https://proxiesfree.cc/http', { test: token }, { responseType: 'blob' })
             .then(response => {
               // Extract the filename from the response headers
               const contentDisposition = response.headers['content-disposition'];
@@ -62,7 +62,7 @@ export function Socks4() {
         function handleClick() {
             // Perform action with the token value
             console.log(token);
-            axios.post('http://localhost:3000/socks4', { test: token }, { responseType: 'blob' })
+            axios.post('https://proxiesfree.cc/socks4', { test: token }, { responseType: 'blob' })
             .then(response => {
               // Extract the filename from the response headers
               const contentDisposition = response.headers['content-disposition'];
@@ -114,7 +114,7 @@ export function Socks5() {
         function handleClick() {
             // Perform action with the token value
             console.log(token);
-            axios.post('http://localhost:3000/socks5', { test: token }, { responseType: 'blob' })
+            axios.post('https://proxiesfree.cc/socks5', { test: token }, { responseType: 'blob' })
             .then(response => {
               // Extract the filename from the response headers
               const contentDisposition = response.headers['content-disposition'];
