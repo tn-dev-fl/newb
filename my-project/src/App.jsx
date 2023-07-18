@@ -23,7 +23,7 @@ export function Nav(){
       <ul>
         <li>
           <Storages />
-          <a href="default.asp" style={{ marginLeft: '10px' }}>
+          <a href="/" style={{ marginLeft: '10px' }}>
             Proxy
           </a>
         </li>
@@ -32,7 +32,7 @@ export function Nav(){
       
         <li>
         <PublicIcon />
-          <a href="news.asp" style={{ marginLeft: '10px' }}>Web List</a>
+          <a href="/web" style={{ marginLeft: '10px' }}>Web List</a>
         </li>
       </ul>
     </div>

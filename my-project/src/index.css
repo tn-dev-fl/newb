@@ -80,8 +80,9 @@ li {
 
 .card-wrapper {
   display: flex;
-  padding: 50px;
+  padding-left: 750px;
   justify-content: space-between;
+  padding-top: 20px;
 }
 
 .card {
@@ -99,7 +100,10 @@ root {
 }
 
 .table-wrapper {
+  table-layout: fixed;
+  
+  /* Optional: Disable horizontal scroll bar */
   height: 60vh; /* Adjust the height to your desired value */
   margin-top: 20px; /* Add margin-top to push the table higher */
-  overflow-y: auto; /* Add vertical scroll if needed */
 }
+html, body {margin: 0; height: 100%; overflow: hidden}

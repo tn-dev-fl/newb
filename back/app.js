@@ -10,6 +10,7 @@ const path = require('path'); // Require the 'path' module
 const fs = require('fs');
 const http =require('http'); // Require the 'fs' module
 app.use(bodyParser.json());
+const log=require('./log');
 app.post('/http', (req, res) => {
   const test = req.body['test'];
   verify(secret, test)
@@ -75,6 +76,7 @@ function countLines(filePath) {
 }
 
 app.get('/json', (req, res) => {
+  log.info("hellow")
   const filePath = 'public/files/json.txt'; // Replace with your file path
 
   getFirstFiveLines(filePath)
