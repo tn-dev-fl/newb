@@ -35,18 +35,18 @@ export default function BasicTableweb() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {proxies.map((proxy, index) => (
+            {proxies.map((Url, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row" className="table-cell">{Url["url"]}</TableCell>
-                <TableCell align="right" className="table-cell">{proxy.cms}</TableCell>
+                <TableCell align="right" className="table-cell">{Url.cms}</TableCell>
                 <TableCell align="right" className="table-cell">
                   <CountryFlag countryCode={proxy.country} svg style={{
                     fontSize: '2em',
                     lineHeight: '2em',
                 }}/>
                 </TableCell>
-                <TableCell align="right" className="table-cell">{proxy.Cloudflare}</TableCell>
-                <TableCell align="right" className="table-cell">{proxy.Port}</TableCell>
+                <TableCell align="right" className="table-cell">{Url.Cloudflare}</TableCell>
+                <TableCell align="right" className="table-cell">{Url.Port}</TableCell>
               </TableRow>
             ))}
           </TableBody>
