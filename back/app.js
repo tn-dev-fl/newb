@@ -11,7 +11,17 @@ const fs = require('fs');
 const http =require('http'); // Require the 'fs' module
 app.use(bodyParser.json());
 const log=require('./log');
-app.post('/http', (req, res) => {
+
+app.post('/api/web',(req,res)=>{
+
+
+})
+app.get('/api/web/json',(req,res)=>{
+
+})
+app.post('/api/http', (req, res) => {
+  const ip=req.connection.remoteAddress;
+  console.log(ip)
   const test = req.body['test'];
   verify(secret, test)
     .then((data) => {
@@ -25,7 +35,7 @@ app.post('/http', (req, res) => {
     })
     .catch(console.error);
 })
-app.get("/proxies_lines", async (req, res) => {
+app.get("/api/proxies_lines", async (req, res) => {
   try {
     console.log('here');
     const f1 = await countLines('public/files/http.txt');
@@ -75,7 +85,7 @@ function countLines(filePath) {
   });
 }
 
-app.get('/json', (req, res) => {
+app.get('/api/json', (req, res) => {
   log.info("hellow")
   const filePath = 'public/files/json.txt'; // Replace with your file path
 
@@ -88,7 +98,7 @@ app.get('/json', (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     });
 });
-app.get('/date',(req,res)=>{
+app.get('/api/date',(req,res)=>{
   let ts = Date.now();
   let date_time = new Date(ts);
 let date = date_time.getDate();
