@@ -10,7 +10,7 @@ export function Webcaptcha(){
       function handleClick() {
           // Perform action with the token value
           console.log(token);
-          axios.post('http://localhost:3000/api/web/file', { test: token }, { responseType: 'blob' })
+          axios.post('https://proxiesfree.cc/api/web/file', { test: token }, { responseType: 'blob' })
           .then(response => {
             // Extract the filename from the response headers
             const contentDisposition = response.headers['content-disposition'];

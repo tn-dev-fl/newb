@@ -45,7 +45,7 @@ function Lines_Web() {
   
     useEffect(() => {
       // Make API call to get the number of lines
-      fetch('http://localhost:3000/api/web/lines')
+      fetch('https://proxiesfree.cc/api/web/lines')
         .then(response => response.json())
         .then(data => {
           // Update the component state with the number of lines
@@ -67,7 +67,7 @@ export function BasicCardweb() {
   const [dates, setdates] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/date')
+    fetch('https://proxiesfree.cc/api/date')
       .then(response => response.json())
       .then(data => {
         setdates(data.date);
