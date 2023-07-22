@@ -12,7 +12,7 @@ export default function BasicTableweb() {
   const [Url, setUrl] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/web/json')
+    fetch('https://proxiesfree.cc/api/web/json')
       .then(response => response.json())
       .then(data => {
         setUrl(data);
