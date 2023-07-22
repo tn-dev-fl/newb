@@ -1,19 +1,25 @@
 import requests
 import subprocess
 import os
+import json
+import random
 def scan_port(web):
-    command = "nmap -p 443,80,22,21 --open "+str(web)+" | grep -oP '\\d+/(tcp|udp)' | awk -F'/' '{ print $1 }' | paste -sd \",\""
-    print(command)
+    command = f"nmap -p 443,80,22,21 --open {web} | grep -oP '\\d+/(tcp|udp)' | awk -F'/' '{{ print $1 }}' | paste -sd \",\""
     try:
-        output = subprocess.check_output(command, shell=True, universal_newlines=True)
-        print("Command output:", output)
-        return output
-    except subprocess.CalledProcessError as e:
-        print("Command execution failed:", e)
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        output, error = process.communicate()
+
+        if "Failed to resolve" in error or "WARNING: No targets were specified" in error:
+            return "Failed"
+
+        return output.strip()
+
+    except Exception as e:
+        return "Failed"
 
 def check_cloudflare(url):
     try:
-        response = requests.head(url)
+        response = requests.head("https://"+url)
         headers = response.headers
 
         if 'server' in headers and 'cloudflare' in headers['server'].lower():
@@ -27,7 +33,7 @@ def check_cloudflare(url):
 
         return False
 
-    except requests.exceptions.RequestException:
+    except Exception as e:
         return False
 
 def split_file_by_lines(file_path, output_directory, lines_per_file=1000):
@@ -46,10 +52,49 @@ def split_file_by_lines(file_path, output_directory, lines_per_file=1000):
 
         file_count += 1
 def menu():
-    with open("websites/output_1.txt","r") as file:
-        print(file.readline())
-        scan_port(file.readline())
-        print(check_cloudflare(file.readline()))
-    
+        with open("public/files/webjson.txt",'a') as f:
+                    
+                        f.write('[')
+
+
+        random_number = random.randint(1, 727)
+        with open("websites/output_"+str(random_number)+".txt","r") as file:
+           count=0
+           file= file.readlines()
+        try:
+            for i in file:
+                print(count)
+                if count==5:
+                    exit()
+                port=scan_port(i.replace(" ","").replace("\n","").replace("\t",""))
+                
+                #print(port)
+                if  port=='Failed' or port=="":
+                    continue
+                else:
+                    
+                    cf=check_cloudflare(i)
+                    json_data = {
+        "port": port.replace('\n',''),
+        "cloudflare": str(cf),
+        "cms":"wordpress",
+        "website":i.replace(" ","").replace("\n","").replace("\t","")
+    }               
+                json_object = json.dumps(json_data)
+                with open("public/files/webjson.txt",'a') as f:
+                    if count==4:
+                        f.write(json_object+']')
+                        count+=1
+                    else:
+                        f.write(json_object+',')
+                        count+=1
+# Print the JSON object
+                
+                
+
+        except Exception as e:
+            print(e)
+            pass
 menu()
+
 

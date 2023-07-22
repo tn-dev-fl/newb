@@ -12,13 +12,56 @@ const http =require('http'); // Require the 'fs' module
 app.use(bodyParser.json());
 const log=require('./log');
 
-app.post('/api/web',(req,res)=>{
+app.post('/api/web/file',(req,res)=>{
+  const ip=req.connection.remoteAddress;
+  const test = req.body['test'];
+
+  verify(secret, test)
+    .then((data) => {
+      
+      if (data.success === true) {
+        log.log('info','the '+ip+' downloaded web file ')
+
+       res.download("public/files/web.txt")
+      } else {
+        console.log('verification failed');
+      }
+    })
+    .catch(console.error);
+})
 
 
+app.get('/api/web/lines',async (req,res)=>{
+  const f1 = await countLines('public/files/web.txt')
+  const jsonResponse = JSON.stringify({ total: f1});
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.end(jsonResponse);
 })
 app.get('/api/web/json',(req,res)=>{
 
+  const filePath = 'public/files/webjson.txt'; // Change this to the path of your file
+  readFileAndSendAsJSON(filePath, res);
 })
+function readFileAndSendAsJSON(filePath, res) {
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      res.status(500).json({ error: 'Error reading file' });
+    } else {
+      let jsonData;
+      try {
+        jsonData = JSON.parse(data);
+        console.log(jsonData)
+      } catch (parseError) {
+        console.error('Error parsing JSON data:', parseError);
+        res.status(500).json({ error: 'Error parsing JSON data' });
+        return;
+      }
+      res.json(jsonData);
+    }
+  });
+}
 app.post('/api/http', (req, res) => {
   const ip=req.connection.remoteAddress;
   console.log(ip)
@@ -27,7 +70,8 @@ app.post('/api/http', (req, res) => {
     .then((data) => {
       
       if (data.success === true) {
-        console.log("here")
+        log.log('info','the '+ip+' downloaded proxies file ')
+
        res.download("public/files/http.txt")
       } else {
         console.log('verification failed');

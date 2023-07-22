@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import HCaptcha from 'react-hcaptcha';
-import { HTTP,Socks4,Socks5 } from "./hcaptcha";
+import { HTTP,Socks4,Socks5, Webcaptcha } from "./hcaptcha";
 
 const bull = (
   <Box
@@ -39,8 +39,64 @@ export default function Lines() {
       </div>
     );
   }
+function Lines_Web() {
 
+    const [lineCount, setLineCount] = useState(0);
+  
+    useEffect(() => {
+      // Make API call to get the number of lines
+      fetch('http://localhost:3000/api/web/lines')
+        .then(response => response.json())
+        .then(data => {
+          // Update the component state with the number of lines
+          setLineCount(data.total);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }, []);
+  
+    return (
+      <div>
+        <p>Number of lines: {lineCount}</p>
+      </div>
+    );
+  }
 
+export function BasicCardweb() {
+  const [dates, setdates] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/date')
+      .then(response => response.json())
+      .then(data => {
+        setdates(data.date);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+  return (
+    <Card sx={{ width: 400, height: 400 }}>
+  <CardContent >
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Free weblist file  
+        </Typography>
+        <Lines_Web/>
+        <Typography variant="h5" component="div">
+        <p>Laste date checked: {dates}</p>
+        </Typography>
+        <Typography variant="body2">
+          <br />
+        </Typography>
+      </CardContent>
+      <CardActions>
+      <Webcaptcha/>
+      </CardActions>
+    </Card>
+  );
+   
+}
 export function BasicCard() {
   const [dates, setdates] = useState([]);
 
@@ -66,7 +122,6 @@ export function BasicCard() {
         </Typography>
         <Typography variant="body2">
           <br />
-          {'"a benevolent smile"'}
         </Typography>
       </CardContent>
       <CardActions>

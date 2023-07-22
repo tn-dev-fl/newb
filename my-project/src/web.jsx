@@ -12,10 +12,10 @@ export default function BasicTableweb() {
   const [Url, setUrl] = useState([]);
 
   useEffect(() => {
-    fetch('https://proxiesfree.cc/api/web')
+    fetch('http://localhost:3000/api/web/json')
       .then(response => response.json())
       .then(data => {
-        setProxies(data.proxies);
+        setUrl(data);
       })
       .catch(error => {
         console.error(error);
@@ -35,18 +35,12 @@ export default function BasicTableweb() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {proxies.map((Url, index) => (
+            {Url.map((url, index) => (
               <TableRow key={index}>
-                <TableCell component="th" scope="row" className="table-cell">{Url["url"]}</TableCell>
-                <TableCell align="right" className="table-cell">{Url.cms}</TableCell>
-                <TableCell align="right" className="table-cell">
-                  <CountryFlag countryCode={proxy.country} svg style={{
-                    fontSize: '2em',
-                    lineHeight: '2em',
-                }}/>
-                </TableCell>
-                <TableCell align="right" className="table-cell">{Url.Cloudflare}</TableCell>
-                <TableCell align="right" className="table-cell">{Url.Port}</TableCell>
+                <TableCell component="th" scope="row" className="table-cell">{url.website}</TableCell>
+                <TableCell align="right" className="table-cell">{url.cms}</TableCell>
+                <TableCell align="right" className="table-cell">{url.cloudflare}</TableCell>
+                <TableCell align="right" className="table-cell">{url.port}</TableCell>
               </TableRow>
             ))}
           </TableBody>

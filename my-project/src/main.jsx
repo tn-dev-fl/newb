@@ -7,13 +7,13 @@ import React from 'react'
 import { render } from 'react-dom';
 import { HTTP } from './hcaptcha.jsx'
 import HCaptcha from 'react-hcaptcha';
-import {BasicCard} from './card.jsx'
+import {BasicCard, BasicCardweb} from './card.jsx'
 import {
   createBrowserRouter,
   RouterProvider,
   useRouteError,
 } from "react-router-dom";
-import { Home } from './web.jsx'
+import BasicTableweb from './web.jsx'
 function MyComponent() {
   useEffect(() => {
     document.title = 'free proxies at proxiesfree.cc';
@@ -54,10 +54,28 @@ const router = createBrowserRouter([
     errorElement :<Errorpage/>,
   },
   {
-    path:"/about",
-    element:<Home/>
+    path:"web",
+    element:<Web/>
   }
 ]);
+function Web(){
+  return(<div>
+    
+      <MyComponent />
+      <Nav />
+      <div className="content">
+        <div className="table-wrapper">
+          <BasicTableweb/>
+        </div>
+        <div>
+        </div>
+        <div className="card-wrapper">
+          <BasicCardweb />
+          {/* Include the additional BasicCard component */}
+        </div>
+      </div>
+    </div>)
+}
 render(
 
 
